@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .background-video {
   position: fixed;
   top: 0;
@@ -9,14 +11,41 @@
   background-color: #000;
 }
 
+*::-webkit-scrollbar {
+  width: 1rem !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #dc3545;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  border-left: 2px solid #ff9900;
+  border-right: 2px solid #ff9900;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4), 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+*::-webkit-scrollbar-track {
+  background: #000;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
 body {
-  font-family: 'Vesper Libre', serif !important;
+  font-family: 'Vesper Libre', serif;
 }
 
 h1 {
   color: white;
   font-size: 3rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .gif-background {
@@ -26,11 +55,145 @@ h1 {
   margin: 0 auto;
 }
 
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+/* custom button */
+.btn-custom {
+  width: 3.5rem;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  color: #f0c52a;
+  background: #dc3545;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn-custom:before {
+  content: '';
+  background: linear-gradient(90deg,
+      #ff6f61cc,
+      #ff9f40cc,
+      #ffdf00cc,
+      #40ff9fcc,
+      #61ff6fcc,
+      #9f40ffcc,
+      #df00ffcc,
+      #ff40dfcc,
+      #ff6f61cc);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-btn-custom 20s linear infinite;
+  transition: opacity 0.5s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-btn-custom {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.btn-custom:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #dc3545;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
 .card {
   background-color: transparent !important;
-  perspective: 1000px; /* Enables 3D space for the rotation */
+  perspective: 1000px;
+  /* Enables 3D space for the rotation */
   padding: 0 !important;
   --bs-border-width: 0 !important;
+}
+
+/* Glowing border effect for cards */
+.card:before {
+  content: '';
+  background: linear-gradient(90deg,
+      #ff6f61cc,
+      #ff9f40cc,
+      #ffdf00cc,
+      #40ff9fcc,
+      #61ff6fcc,
+      #9f40ffcc,
+      #df00ffcc,
+      #ff40dfcc,
+      #ff6f61cc);
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  background-size: 800%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  transition: all 1.5s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+/* Apply animation on hover */
+.card:hover:before {
+  animation: glowing-card-animation 10s linear infinite;
+  opacity: 1;
+  /* Show on hover */
+}
+
+/* Glowing animation for the cards */
+@keyframes glowing-card-animation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 800% 0;
+  }
+}
+
+/* Inner shadow effect */
+.card:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  z-index: -1;
 }
 
 /* The element that will rotate */
@@ -39,11 +202,81 @@ h1 {
   position: relative;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-/* Flip on hover */
+/* Glowing border effect for flip-inner */
+.flip-inner:before {
+  content: '';
+  background: linear-gradient(90deg,
+      #ff6e618c,
+      #ffa040ad,
+      #ffdd00a1,
+      #40ffa0ab,
+      #61ff6ea2,
+      #a040ff9f,
+      #dd00ffa8,
+      #ff40df9c,
+      #ff6e61ad);
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: calc(100% + 5px);
+  height: calc(100% + 5px);
+  background-size: 800%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  transition: all 1.5s ease-in-out;
+  border-radius: 10px;
+  opacity: 0;
+}
+
+/* Apply animation on hover */
+.card:hover .flip-inner:before {
+  animation: glowing-card-animation 10s linear infinite;
+  opacity: 1;
+  /* Show on hover */
+}
+
+/* Glowing animation for the flip-inner */
+@keyframes glowing-card-animation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 800% 0;
+  }
+}
+
+/* Inner shadow effect */
+.flip-inner:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Flip on hover with moving border effect */
 .card:hover .flip-inner {
   transform: rotateY(180deg);
+  animation: moving-border 1s linear infinite;
+}
+
+/* Flip on click with 720-degree rotation effect */
+.card:active .flip-inner {
+  transform: rotateY(900deg);
+  transition: transform 2s ease;
 }
 
 /* Front and back faces */
@@ -54,7 +287,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; 
+  backface-visibility: hidden;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -78,6 +311,21 @@ h1 {
   object-fit: contain;
 }
 
+/* Keyframes for moving border effect */
+@keyframes moving-border {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
 /* Modal Content Styling */
 .modal-content {
   border-radius: 10px;
@@ -89,16 +337,23 @@ h1 {
 
 /* Modal Header Styling */
 .modal-header {
-  background-color: #ff6f61; /* A vibrant color */
-  color: white;
-  border-bottom: 3px solid #ff3b2d;
-  padding: 20px;
+  /* A vibrant color */
+  border-bottom: 3px solid #ff3b2d !important;
+  padding-top: 6rem !important;
+  padding-bottom: 6rem !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  max-width: 100% !important;
+  background-color: #00000080;
+  background-blend-mode: overlay;
 }
 
 .modal-header .modal-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem !important;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
 }
 
 .modal-header .btn-close {
@@ -114,6 +369,18 @@ h1 {
   color: #000;
 }
 
+.read_more {
+  background-color: transparent;
+  color: #ff6f61;
+  border-color: #ff6f61;
+}
+
+.read_more:hover {
+  background-color: #ff6f61;
+  border-color: #ff6f61;
+
+}
+
 /* Modal Body Styling */
 .modal-body {
   padding: 20px;
@@ -121,6 +388,8 @@ h1 {
   color: #333;
   line-height: 1.6;
   background-color: #fff;
+  font-family: "Merriweather", serif;
+  ;
 }
 
 .modal-body h5 {
@@ -144,6 +413,12 @@ h1 {
   margin-bottom: 10px;
 }
 
+.modal-body img {
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+}
+
 /* Card Description */
 .modal-body .card-description {
   margin-top: 15px;
@@ -154,14 +429,33 @@ h1 {
   border-radius: 5px;
 }
 
-/* Buttons and Close Icon */
-.btn-close {
-  opacity: 0.7;
+.btn-close-custom {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: white;
+  cursor: pointer;
+  opacity: 0.8;
   transition: opacity 0.3s ease;
+  background-color: #00000080;
+  border-radius: 0 0 0 50rem !important;
+  height: 48px !important;
+  align-items: center;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  z-index: 10;
 }
 
-.btn-close:hover {
+.btn-close-custom:hover {
   opacity: 1;
+  color: #ff6f61;
 }
 
 /* Animations */
@@ -181,23 +475,30 @@ h1 {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #fff; /* White background */
-  color: #dc3545; /* Bootstrap danger red */
-  border: 2px solid #dc3545; /* Red border */
-  border-radius: 30px; /* Rounded button */
+  background-color: #fff;
+  /* White background */
+  color: #dc3545;
+  /* Bootstrap danger red */
+  border: 2px solid #dc3545;
+  /* Red border */
+  border-radius: 30px;
+  /* Rounded button */
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   display: flex;
   align-items: center;
   cursor: pointer;
-  z-index: 1000; /* Ensure it stays on top */
+  z-index: 1000;
+  /* Ensure it stays on top */
   transition: all 0.3s ease-in-out;
 }
 
 .mute-btn:hover {
-  background-color: #dc3545; /* Red background on hover */
-  color: #fff; /* White text on hover */
+  background-color: #dc3545;
+  /* Red background on hover */
+  color: #fff;
+  /* White text on hover */
 }
 
 .mute-icon {
@@ -207,7 +508,8 @@ h1 {
 
 /* Optional: Add a subtle click effect */
 .mute-btn:active {
-  transform: scale(0.95); /* Slightly smaller when clicked */
+  transform: scale(0.95);
+  /* Slightly smaller when clicked */
 }
 
 /* Highlight Current Day */
@@ -220,6 +522,7 @@ h1 {
     box-shadow: 0 0 5px #ffdf00, 0 0 10px #ffdf00, 0 0 20px #ffdf00;
     transform: scale(1);
   }
+
   100% {
     box-shadow: 0 0 10px #ffdf00, 0 0 20px #ffdf00, 0 0 40px #ffdf00;
     transform: scale(1.05);
@@ -233,12 +536,19 @@ h1 {
     margin: auto;
   }
 
-  .modal-header {
-    font-size: 1rem;
-    padding: 15px;
-  }
-
   .modal-body {
     padding: 15px;
+  }
+}
+
+@media (max-width: 350px) {
+
+  .flip-front img,
+  .flip-back img {
+    padding: 0 !important;
+  }
+
+  .modal-header .modal-title {
+    font-size: 1.5rem !important;
   }
 }
