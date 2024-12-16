@@ -3,12 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Magic December - a showcase of festivals, celebrations and events throughout the month of December! Get into the festive spirit with us!">
+    <meta name="author" content="The Ho Ho Homies, Linus Johansson, Gregory Stary, Tamanna Islam, Anna Sahaidachna, Morgana Stone">
+    <meta name="keywords" content="December, Celebration, Festivals in December, Events in December, Advent Calendar Events">
     <title>Magic December</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <!--Add Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,19 +29,53 @@
     />
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="./assets/css/custom-cursor.css" />
+    <!-- Add this line -->
   </head>
 
   <body>
     <!-- Snow video background -->
-    <video class="background-video" autoplay loop muted playsinline>
+    <video class="background-video" autoplay loop muted playsinline disablePictureInPicture>
       <source src="assets/videos/snow.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
     <div class="container">
-      <button id="mute-button" class="mute-btn">
-        <span class="mute-icon">&#128264;</span> Mute
-      </button>
-      <img src="assets/images/logo.webp" class="gif-background my-2" />
+      <img src="assets/images/logo.webp" class="gif-background my-2" alt="Magic December Logo" />
+      <div
+        class="controls-container my-lg-3 my-4 d-flex justify-content-between"
+      >
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-custom d-flex align-items-center justify-content-center py-3"
+          data-bs-toggle="modal"
+          data-bs-target="#instructionsModal"
+          aria-label="Click here to read instructions for the site"
+        >
+          <i class="fa-solid fa-question fa-lg"></i>
+        </button>
+        <!-- Mute button -->
+        <button
+          id="mute-button"
+          class="btn btn-custom d-flex align-items-center justify-content-center py-3"
+          aria-label="Click here to mute the sound effect on the site"
+        >
+          <i class="fa-solid fa-volume-high fa-lg"></i>
+        </button>
+        <!-- GitHub button -->
+        <a
+          id="github-logo"
+          href="https://github.com/Morgana-S/magic-december"
+          target="_blank"
+          class="btn btn-custom d-flex align-items-center justify-content-center py-3"
+          aria-label="Click here to go to the GitHub Repo for this project (opens in a new tab)"
+        >
+          <i class="fa-brands fa-github fa-lg"></i>
+        </a>
+      </div>
+      <!-- Include instructions modal -->
+      <div id="instructions-modal-container"></div>
+
       <div id="calendar-days">
         <!-- Days will be loaded here -->
       </div>

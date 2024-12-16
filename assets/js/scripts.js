@@ -3,11 +3,11 @@ let isMuted = false;
 // Function to toggle mute state
 function toggleMute() {
   isMuted = !isMuted;
-  console.log(`Mute toggled: ${isMuted}`); // Debugging log
-
   const muteButton = document.getElementById('mute-button');
   if (muteButton) {
-    muteButton.textContent = isMuted ? 'Unmute' : 'Mute';
+    muteButton.innerHTML = isMuted
+      ? '<i class="fa-solid fa-volume-xmark fa-lg"></i>'
+      : '<i class="fa-solid fa-volume-high fa-lg"></i>';
   }
 }
 
@@ -20,8 +20,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Initialize the calendar
   await initialize();
+
+  // Load instructions modal
+  await loadInstructionsModal();
 });
 
+// Function to load the instructions modal content
+async function loadInstructionsModal() {
+  const response = await fetch('partials/instructions.html');
+  const data = await response.text();
+  const instructionsModalContainer = document.getElementById(
+    'instructions-modal-container',
+  );
+  if (instructionsModalContainer) {
+    instructionsModalContainer.innerHTML = data;
+  }
+}
 
 // Function to load the days content into the calendar
 async function loadDays() {
@@ -40,7 +54,7 @@ async function loadDays() {
     dayElements.forEach((dayElement, index) => {
       const dayNumber = index + 1; // Adjust index to start from 1
 
-      if ([19, 22, 27, 29].includes(dayNumber)) {
+      if (!dayNumber) {
         // Make days 19 to 23 unclickable
         dayElement.removeAttribute('data-bs-toggle'); // Remove modal toggle attribute
         dayElement.removeAttribute('data-bs-target'); // Remove modal target attribute
@@ -55,11 +69,12 @@ async function loadDays() {
 
         // Add click event to play the bell sound
         dayElement.addEventListener('click', () => {
-          if (!isMuted) { // Play the sound only if not muted
+          if (!isMuted) {
+            // Play the sound only if not muted
             bellSound.currentTime = 0; // Reset sound to the beginning
             bellSound.play(); // Play the bell sound
           }
-        });        
+        });
       }
 
       // Tooltip logic
@@ -67,18 +82,13 @@ async function loadDays() {
       if (tooltipWrapper) {
         tooltipWrapper.setAttribute('data-bs-toggle', 'tooltip');
         tooltipWrapper.setAttribute('data-bs-placement', 'top');
-        tooltipWrapper.setAttribute(
-          'title',
-          [19, 22, 27, 29].includes(dayNumber)
-            ? 'This day is not clickable'
-            : `Day ${dayNumber}`
-        );
+        tooltipWrapper.setAttribute('title', `Day ${dayNumber}`);
       }
     });
 
     // Enable Bootstrap tooltips
     const tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      document.querySelectorAll('[data-bs-toggle="tooltip"]'),
     );
     tooltipTriggerList.forEach(function (tooltipTriggerEl) {
       new bootstrap.Tooltip(tooltipTriggerEl);
@@ -117,7 +127,7 @@ async function loadModals() {
   }
 
   // Load modal contents for each day
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= 31; i++) {
     const dayResponse = await fetch(`partials/day-content/day${i}.html`);
     const content = await dayResponse.text();
     const dayContentElement = document.getElementById(`day${i}Content`);
@@ -127,11 +137,73 @@ async function loadModals() {
   }
 }
 
+function setupReadMoreButtons() {
+  const readMoreButtons = document.querySelectorAll('.read_more');
+
+  readMoreButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      const collapseTarget = this.getAttribute('data-bs-target');
+      const collapseElement = document.querySelector(collapseTarget);
+
+      if (collapseElement) {
+        collapseElement.addEventListener('shown.bs.collapse', () => {
+          this.textContent = 'Read less';
+        });
+
+        collapseElement.addEventListener('hidden.bs.collapse', () => {
+          this.textContent = 'Read more';
+        });
+      }
+
+      // Toggle button text immediately on click
+      this.textContent =
+        this.textContent === 'Read more' ? 'Read less' : 'Read more';
+    });
+  });
+}
+
+function manageTooltipsOnResize() {
+  const isSmallScreen = window.matchMedia('(max-width: 768px)').matches;
+  const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+
+  tooltips.forEach((tooltipEl) => {
+    const tooltipInstance = bootstrap.Tooltip.getInstance(tooltipEl);
+
+    if (isSmallScreen) {
+      // Destroy tooltips on small screens
+      if (tooltipInstance) {
+        tooltipInstance.dispose();
+      }
+    } else {
+      // Re-enable tooltips on larger screens
+      if (!tooltipInstance) {
+        new bootstrap.Tooltip(tooltipEl);
+      }
+    }
+  });
+}
+
+// Run on load and resize
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize tooltips for larger screens by default
+  if (!window.matchMedia('(max-width: 768px)').matches) {
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((tooltipEl) => {
+      new bootstrap.Tooltip(tooltipEl);
+    });
+  }
+
+  // Add resize event listener
+  manageTooltipsOnResize();
+});
+window.addEventListener('resize', manageTooltipsOnResize);
+
+
 // Function to initialize the calendar by loading days and modals
 async function initialize() {
   await loadDays();
   enableCurrentDays();
   await loadModals();
+  setupReadMoreButtons();
 }
 
 initialize();

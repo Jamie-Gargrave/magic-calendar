@@ -1,7 +1,9 @@
 # Magic December - A Showcase of Festivals, Holidays and Celebrations from around the world
-<!-- Add image of responsive design showcase here -->
+![Responsive Design Showcase](/documentation/feature-images/responsive-design-showcase.png)
 ## Deployment
-The project is deployed and can be accessed at: https://jamie-gargrave.github.io/magic-calendar/
+The project is deployed and can be accessed at: https://morgana-s.github.io/magic-december/
+## Issues Tracker / KanBan Board
+Our issues tracker can be accessed here: https://github.com/users/Morgana-S/projects/1
 ## Criteria
 ### The project fits the theme of celebrating the holidays.
 - Our project is focused on not only celebrating Christmas, but the variety of holidays and festivals that are celebrated around the world. With each day on the calendar, we have tried to provide a relevant celebration that occurs on that day; however, we have also chosen several major celebrations that occur at different times of the year. While Christmas is the main holiday that people are thinking about right now, there's no reason not to maintain that festive spirit throughout the year. 
@@ -39,7 +41,7 @@ Our project is unique as it uses the motif of a local holiday tradition (advent 
 - The information provided is comprehensive, but we also allow users to go ahead and find out more information for themselves. 
 
 ## UI/UX Design
-The wireframes for the website's design can be found [here.](/documentation/wireframes/magic-calendar.pdf)
+The wireframes for the website's design can be found [here.](/documentation/wireframes/magic-december.pdf)
 The wireframes for this project are very rudimentary and designed to give us a foundational idea on how to structure the website. 
 Early in the project, the team decided to use Bootstrap as a framework for the site's design. 
 This allowed the use of the in-built class templates to provide a mobile-first, responsively designed site. 
@@ -58,6 +60,42 @@ While the wireframes themselves were rudimentary, regular discussion was had bet
 - As a frequent visitor, I want the site to have new content available to me each day.
 - As a frequent visitor, I want to be able to find out more information on each festival after reading the site's content.
 
+## Features
+### Animated Background
+The site features an animated background to really get users in the festive mood.
+
+![Animated Background](/documentation/feature-images/animated-background.gif)
+### Custom Cursor and Scrollbar
+A custom cursor was implemented that fit the 'magic' theme of the site. We also implemented a custom scrollbar for added effect.
+
+![Custom Cursor](/documentation/feature-images/cursor.gif)
+
+![Custom Scrollbar](/documentation/feature-images/scrollbar.png)
+
+### User Controls
+User controls were added to allow the user to read instructions on how to use the site, mute the sound effect if desired, and visit the GitHub repo.
+
+![User Controls](/documentation/feature-images/user-controls.gif)
+### Card Animations
+Animations were added to each card to provide an entertaining degree of interactivity: Try holding click over one of the cards to make it spin multiple times!
+
+![Card Animations](/documentation/feature-images/card-animations.gif)
+
+### Modal-Based Design
+The project features heavy use of modals to display content in a sleek and unobtrusive fashion. The modals can be closed by clicking the close button, or by clicking outside of the modal area.
+
+![Modal-Based Design](/documentation/feature-images/modal-based-design.gif)
+
+### Collapsable Content
+To allow users to choose how much content they wanted to see - whether they wanted a brief summary of the celebration, or to find out more information - we implemented a collapsible element which displays more information on the celebration. 
+
+![Collapsable Content](/documentation/feature-images/collapsable-content.gif)
+
+### Date Sensitive Content
+The site highlights the current day of the month for December - for example, the GIF below was recorded on the 15th December.
+
+![Date Sensitive Content](/documentation/feature-images/date-sensitive-content.gif)
+
 ## Notable Challenges
 ### Functionality
 Discussions were held at regular intervals about the scope and functionality of the site. We decided early on to expand the scope of the project from the traditional 25 day advent calendar to a full month of holiday celebrations. However, we noted that some days of the month of December do not have any notable holidays. We discussed addressing this issue in two ways:
@@ -73,6 +111,8 @@ We ultimately decided to go for the GIF content as we felt that this helped to '
 - Tooltip does not show 'This day is not clickable' on inactive days. 
     - Cause: This is caused by the 'disabled' class having a 'pointer-events: none' property, which causes the tooltip not to fire.
     - Fix: Remove the 'pointer events: none' property from the 'disabled' class. The 'cursor: not-allowed' property can remain to indicate to the user that the button is not clickable.
+
+### Lighthouse Report
 
 ## Credits
 
